@@ -13,14 +13,15 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { pokemons } from "./const";
+import Link from "next/link";
 
-const getImageFileName = (id: number) => {
+const getThumbnailFile = (id: number) => {
   if (id < 10) {
-    return `00${id}.png`;
+    return `./thumbnails/00${id}.png`;
   } else if (id < 100) {
-    return `0${id}.png`;
+    return `./thumbnails/0${id}.png`;
   } else {
-    return `${id}.png`;
+    return `./thumbnails/${id}.png`;
   }
 };
 
@@ -42,14 +43,16 @@ export default function Home() {
             <Card sx={{ width: 150, height: 250 }}>
               <CardMedia
                 component="img"
-                image={getImageFileName(pokemon.id)}
+                image={getThumbnailFile(pokemon.id)}
                 title="green iguana"
               />
               <CardContent>
                 <Typography variant="body2">{pokemon.name.japanese}</Typography>
                 <Typography variant="body2">{pokemon.type[0]}</Typography>
               </CardContent>
-              <Button size="small">詳細</Button>
+              <Button size="small">
+                <Link href={`/page1?id=${pokemon.id}`}>About Us</Link>
+              </Button>
             </Card>
           </Grid>
         ))}
